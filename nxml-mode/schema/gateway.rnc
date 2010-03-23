@@ -1,0 +1,169 @@
+<?xml version="1.0"?> 
+
+<!-- This schema is written using Relax NG.  See
+http://www.relaxng.org/ for more info -->
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+
+<!-- Define HTML attributes -->
+
+  <define name="htmlattribs">
+    <zeroOrMore>
+        <attribute name="class"><text/></attribute>
+	<attribute name="id"><text/></attribute>
+	<attribute name="title"><text/></attribute>
+	<attribute name="style"><text/></attribute>
+	<attribute name="dir"><text/></attribute>
+	<attribute name="xml:lang"><text/></attribute>
+    </zeroOrMore>
+  </define>
+
+
+<start>
+element wrapper{ 
+
+ element catalog {
+  
+    attribute type{text}?
+  </zeroOrMore>
+
+  <element name="linkData">
+    <attribute name="type">
+      <text/>
+    </attribute>
+    
+    <oneOrMore>
+    <element name="linkDesc">
+      <zeroOrMore>
+	<ref name="htmlattribs"/>
+      </zeroOrMore>
+    </element>
+    <element name="linkImage">
+      <ref name="htmlattribs"/>
+      <attribute name="alt"><text/></attribute>
+      <attribute name="height"><text/></attribute>
+      <attribute name="longdesc"><text/></attribute>
+      <attribute name="width"><text/></attribute>
+      <attribute name="width"><text/></attribute>
+      <attribute name="onclick"><text/></attribute>
+      <attribute name="ondblclick"><text/></attribute>
+      <attribute name="onkeydown"><text/></attribute>
+      <attribute name="onkeypress"><text/></attribute>
+      <attribute name="onkeyup"><text/></attribute>
+      <attribute name="onmousedown"><text/></attribute>
+      <attribute name="onmousemove"><text/></attribute>
+      <attribute name="onmouseout"><text/></attribute>
+      <attribute name="onmouseover"><text/></attribute>
+      <attribute name="onmouseup"><text/></attribute>
+    </element>
+    <element name="linkLongDesc">
+      <zeroOrMore>
+	<ref name="htmlattribs"/>
+      </zeroOrMore>
+    </element>
+    </oneOrMore>
+  </element>
+</element>
+
+<element name="form">
+
+  <attribute name="action"><text/></attribute>
+  <attribute name="name"><text/></attribute>
+  <attribute name="method"><text/></attribute>
+
+  <zeroOrMore>
+    <ref name="htmlattribs"/>
+    <attribute name="secure">
+      <choice>
+	<value>Y</value>
+      </choice>
+    </attribute>
+  <attribute name="host"><text/></attribute>
+
+  <element name="formInput">
+    <attribute name="name"><text/></attribute>
+    <attribute name="type">
+      <choice>
+	<value>textarea</value>
+	<value>select</value>
+	<value>radio</value>
+	<value>checkbox</value>
+	<value>input box</value>
+	<value>emailaddr</value>
+      </choice>
+    </attribute>
+
+    <zeroOrMore>
+    <ref name="htmlattribs"/>
+    <attribute name="required">
+       <choice>
+       <value>Y</value>
+       </choice>
+    </attribute>
+    
+    <attribute name="value"><text/></attribute>
+    <attribute name="validationclass"><text/></attribute>
+    <attribute name="size"><text/></attribute>
+
+    </zeroOrMore>
+  </element>
+  </zeroOrMore>
+</element>
+
+
+<element name="xmlGenericData">
+  <zeroOrMore>
+    <attribute name="document"><text/></attribute>
+  </zeroOrMore>
+
+  <element name="xmlInfo">
+    <attribute name="name"><text/></attribute>
+    <zeroOrMore>
+      <attribute name="repeatable">
+       <choice>
+       <value>Y</value>
+       </choice>
+      </attribute>
+    
+    <element name="xmlInfoChunk">
+      <zeroOrMore>
+	<attribute name="name"><text/></attribute>
+	<attribute name="type"><text/></attribute>
+	<attribute name="defaultvalue"><text/></attribute>
+	<attribute name="size"><text/></attribute>
+	<attribute name="rows"><text/></attribute>
+	<attribute name="cols"><text/></attribute>
+      </zeroOrMore>
+    </element>
+    </zeroOrMore>
+    
+    <element name="xmlInfoTest">
+      <element name="xmlInfoCase">
+	<attribute name="level">
+	  <choice>
+	    <value>sibling</value>
+	    <value>document</value>
+	    <value>default</value>
+	  </choice>
+	
+	</attribute>
+      </element>
+   
+</element>
+</element>
+</element>
+
+<element name="specialChar">
+  <attribute name="value"><text/></attribute>
+</element>
+
+<element name="includeFile">
+  <zeroOrMore>
+    <attribute name="name"><text/></attribute>
+  </zeroOrMore>
+</element>
+
+</zeroOrMore>
+</element>
+</start>
+</grammar>

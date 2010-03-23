@@ -1,0 +1,17 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+ClipValue.datatype = xsd:string
+
+SVG.clip.attrib = attribute clip { ClipValue.datatype }?
+
+SVG.overflow.attrib = 
+   attribute overflow { "visible" | "hidden" | "scroll" | "auto" | "inherit" }?
+
+SVG.Viewport.extra.attrib = empty
+
+SVG.Viewport.attrib &= 
+   SVG.clip.attrib,
+   SVG.overflow.attrib,
+   SVG.Viewport.extra.attrib

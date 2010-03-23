@@ -1,0 +1,52 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+include "svg-basic-graphics-attrib.rnc"
+
+SVG.image-rendering.attrib = 
+   attribute image-rendering
+   {
+      "auto" | "optimizeSpeed" | "optimizeQuality" | "inherit"
+   }?
+
+SVG.pointer-events.attrib = 
+   attribute pointer-events
+   {
+      "visiblePainted"
+    | "visibleFill"
+    | "visibleStroke"
+    | "visible"
+    | "painted"
+    | "fill"
+    | "stroke"
+    | "all"
+    | "none"
+    | "inherit"
+   }?
+
+SVG.shape-rendering.attrib = 
+   attribute shape-rendering
+   {
+      "auto"
+    | "optimizeSpeed"
+    | "crispEdges"
+    | "geometricPrecision"
+    | "inherit"
+   }?
+
+SVG.text-rendering.attrib = 
+   attribute text-rendering
+   {
+      "auto"
+    | "optimizeSpeed"
+    | "optimizeLegibility"
+    | "geometricPrecision"
+    | "inherit"
+   }?
+
+SVG.Graphics.attrib &= 
+   SVG.image-rendering.attrib,
+   SVG.pointer-events.attrib,
+   SVG.shape-rendering.attrib,
+   SVG.text-rendering.attrib

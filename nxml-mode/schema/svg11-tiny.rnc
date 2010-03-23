@@ -1,0 +1,41 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+include "svg-paint-attrib.rnc"
+
+include "svg-basic-graphics-attrib.rnc"
+
+include "svg-docevents-attrib.rnc"
+
+include "svg-graphevents-attrib.rnc"
+
+include "svg-animevents-attrib.rnc"
+
+include "svg-xlink-attrib.rnc"
+
+include "svg-extresources-attrib.rnc"
+
+include "svg-basic-structure.rnc"
+
+include "svg-conditional.rnc"
+
+include "svg-image.rnc"
+
+include "svg-style.rnc"
+
+include "svg-shape.rnc"
+
+include "svg-basic-text.rnc"
+
+include "svg-hyperlink.rnc"
+
+include "svg-view.rnc"
+
+include "svg-script.rnc"
+
+include "svg-animation.rnc"
+
+include "svg-basic-font.rnc"
+
+include "svg-extensibility.rnc"

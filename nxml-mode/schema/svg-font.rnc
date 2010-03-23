@@ -1,0 +1,73 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+include "svg-basic-font.rnc"
+
+SVG.font-face.extra.class &= definition-src?
+
+SVG.glyph.class |= 
+   SVG.Animation.class
+ | SVG.Structure.class
+ | SVG.Conditional.class
+ | SVG.Image.class
+ | SVG.Style.class
+ | SVG.Shape.class
+ | SVG.Text.class
+ | SVG.Marker.class
+ | SVG.Profile.class
+ | SVG.Gradient.class
+ | SVG.Pattern.class
+ | SVG.Clip.class
+ | SVG.Mask.class
+ | SVG.Filter.class
+ | SVG.Cursor.class
+ | SVG.Hyperlink.class
+ | SVG.View.class
+ | SVG.Script.class
+ | SVG.Font.class
+
+SVG.missing-glyph.class |= 
+   SVG.Animation.class
+ | SVG.Structure.class
+ | SVG.Conditional.class
+ | SVG.Image.class
+ | SVG.Style.class
+ | SVG.Shape.class
+ | SVG.Text.class
+ | SVG.Marker.class
+ | SVG.Profile.class
+ | SVG.Gradient.class
+ | SVG.Pattern.class
+ | SVG.Clip.class
+ | SVG.Mask.class
+ | SVG.Filter.class
+ | SVG.Cursor.class
+ | SVG.Hyperlink.class
+ | SVG.View.class
+ | SVG.Script.class
+ | SVG.Font.class
+
+SVG.font-face-uri.content |= font-face-format*
+
+SVG.font-face-format.content = empty
+
+font-face-format = 
+   element font-face-format
+   {
+      attlist.font-face-format,
+      SVG.font-face-format.content
+   }
+
+attlist.font-face-format &= SVG.Core.attrib, attribute string { text }?
+
+SVG.definition-src.content = empty
+
+definition-src = 
+   element definition-src
+   {
+      attlist.definition-src,
+      SVG.definition-src.content
+   }
+
+attlist.definition-src &= SVG.Core.attrib, SVG.XLinkRequired.attrib

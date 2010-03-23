@@ -1,0 +1,69 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+Paint.datatype = xsd:string
+
+StrokeDashArrayValue.datatype = xsd:string
+
+StrokeDashOffsetValue.datatype = xsd:string
+
+StrokeMiterLimitValue.datatype = xsd:string
+
+StrokeWidthValue.datatype = xsd:string
+
+SVG.fill.attrib = attribute fill { Paint.datatype }?
+
+SVG.fill-rule.attrib = attribute fill-rule { ClipFillRule.datatype }?
+
+SVG.stroke.attrib = attribute stroke { Paint.datatype }?
+
+SVG.stroke-dasharray.attrib = 
+   attribute stroke-dasharray { StrokeDashArrayValue.datatype }?
+
+SVG.stroke-dashoffset.attrib = 
+   attribute stroke-dashoffset { StrokeDashOffsetValue.datatype }?
+
+SVG.stroke-linecap.attrib = 
+   attribute stroke-linecap { "butt" | "round" | "square" | "inherit" }?
+
+SVG.stroke-linejoin.attrib = 
+   attribute stroke-linejoin { "miter" | "round" | "bevel" | "inherit" }?
+
+SVG.stroke-miterlimit.attrib = 
+   attribute stroke-miterlimit { StrokeMiterLimitValue.datatype }?
+
+SVG.stroke-width.attrib = attribute stroke-width { StrokeWidthValue.datatype }?
+
+SVG.Paint.extra.attrib = empty
+
+SVG.Paint.attrib &= 
+   SVG.fill.attrib,
+   SVG.fill-rule.attrib,
+   SVG.stroke.attrib,
+   SVG.stroke-dasharray.attrib,
+   SVG.stroke-dashoffset.attrib,
+   SVG.stroke-linecap.attrib,
+   SVG.stroke-linejoin.attrib,
+   SVG.stroke-miterlimit.attrib,
+   SVG.stroke-width.attrib,
+   SVG.Paint.extra.attrib
+
+SVG.color.attrib = attribute color { Color.datatype }?
+
+SVG.color-interpolation.attrib = 
+   attribute color-interpolation { "auto" | "sRGB" | "linearRGB" | "inherit" }?
+
+SVG.color-rendering.attrib = 
+   attribute color-rendering
+   {
+      "auto" | "optimizeSpeed" | "optimizeQuality" | "inherit"
+   }?
+
+SVG.Color.extra.attrib = empty
+
+SVG.Color.attrib &= 
+   SVG.color.attrib,
+   SVG.color-interpolation.attrib,
+   SVG.color-rendering.attrib,
+   SVG.Color.extra.attrib

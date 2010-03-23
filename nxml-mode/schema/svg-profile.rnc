@@ -1,0 +1,34 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
+SVG.Profile.extra.attrib = empty
+
+SVG.Profile.attrib &= 
+   attribute color-profile { text }?,
+   SVG.Profile.extra.attrib
+
+SVG.Profile.extra.class = notAllowed
+
+SVG.Profile.class |= color-profile | SVG.Profile.extra.class
+
+SVG.color-profile.content = SVG.Description.class*
+
+color-profile = 
+   element color-profile { attlist.color-profile, SVG.color-profile.content }
+
+attlist.color-profile &= 
+   SVG.Core.attrib,
+   SVG.XLink.attrib,
+   attribute local { text }?,
+   attribute name { text },
+   [ a:defaultValue = "auto" ]
+   attribute rendering-intent
+   {
+      "auto"
+    | "perceptual"
+    | "relative-colorimetric"
+    | "saturation"
+    | "absolute-colorimetric"
+   }?

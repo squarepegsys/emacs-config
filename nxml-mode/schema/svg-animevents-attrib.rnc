@@ -1,0 +1,18 @@
+default namespace id61777 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+SVG.onbegin.attrib = attribute onbegin { Script.datatype }?
+
+SVG.onend.attrib = attribute onend { Script.datatype }?
+
+SVG.onrepeat.attrib = attribute onrepeat { Script.datatype }?
+
+SVG.AnimationEvents.extra.attrib = empty
+
+SVG.AnimationEvents.attrib &= 
+   SVG.onbegin.attrib,
+   SVG.onend.attrib,
+   SVG.onrepeat.attrib,
+   SVG.onload.attrib,
+   SVG.AnimationEvents.extra.attrib

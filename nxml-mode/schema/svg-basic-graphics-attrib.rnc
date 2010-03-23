@@ -1,0 +1,36 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+SVG.display.attrib = 
+   attribute display
+   {
+      "inline"
+    | "block"
+    | "list-item"
+    | "run-in"
+    | "compact"
+    | "marker"
+    | "table"
+    | "inline-table"
+    | "table-row-group"
+    | "table-header-group"
+    | "table-footer-group"
+    | "table-row"
+    | "table-column-group"
+    | "table-column"
+    | "table-cell"
+    | "table-caption"
+    | "none"
+    | "inherit"
+   }?
+
+SVG.visibility.attrib = 
+   attribute visibility { "visible" | "hidden" | "inherit" }?
+
+SVG.Graphics.extra.attrib = empty
+
+SVG.Graphics.attrib &= 
+   SVG.display.attrib,
+   SVG.visibility.attrib,
+   SVG.Graphics.extra.attrib

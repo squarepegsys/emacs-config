@@ -1,0 +1,26 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+SVG.onunload.attrib = attribute onunload { Script.datatype }?
+
+SVG.onabort.attrib = attribute onabort { Script.datatype }?
+
+SVG.onerror.attrib = attribute onerror { Script.datatype }?
+
+SVG.onresize.attrib = attribute onresize { Script.datatype }?
+
+SVG.onscroll.attrib = attribute onscroll { Script.datatype }?
+
+SVG.onzoom.attrib = attribute onzoom { Script.datatype }?
+
+SVG.DocumentEvents.extra.attrib = empty
+
+SVG.DocumentEvents.attrib &= 
+   SVG.onunload.attrib,
+   SVG.onabort.attrib,
+   SVG.onerror.attrib,
+   SVG.onresize.attrib,
+   SVG.onscroll.attrib,
+   SVG.onzoom.attrib,
+   SVG.DocumentEvents.extra.attrib

@@ -1,0 +1,173 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
+include "svg-basic-filter.rnc"
+
+SVG.FilterPrimitive.class |= 
+   feConvolveMatrix
+ | feDiffuseLighting
+ | feDisplacementMap
+ | feMorphology
+ | feSpecularLighting
+ | feTurbulence
+
+SVG.feConvolveMatrix.content = ( animate | set )*
+
+feConvolveMatrix = 
+   element feConvolveMatrix
+   {
+      attlist.feConvolveMatrix,
+      SVG.feConvolveMatrix.content
+   }
+
+attlist.feConvolveMatrix &= 
+   SVG.Core.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitiveWithIn.attrib,
+   attribute order { NumberOptionalNumber.datatype },
+   attribute kernelMatrix { text },
+   attribute divisor { Number.datatype }?,
+   attribute bias { Number.datatype }?,
+   attribute targetX { Integer.datatype }?,
+   attribute targetY { Integer.datatype }?,
+   [ a:defaultValue = "duplicate" ]
+   attribute edgeMode { "duplicate" | "wrap" | "none" }?,
+   attribute kernelUnitLength { NumberOptionalNumber.datatype }?,
+   attribute preserveAlpha { Boolean.datatype }?
+
+SVG.feDiffuseLighting.content = 
+   ( feDistantLight | fePointLight | feSpotLight ),
+   ( animate | set | animateColor )*
+
+feDiffuseLighting = 
+   element feDiffuseLighting
+   {
+      attlist.feDiffuseLighting,
+      SVG.feDiffuseLighting.content
+   }
+
+attlist.feDiffuseLighting &= 
+   SVG.Core.attrib,
+   SVG.Style.attrib,
+   SVG.Color.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitiveWithIn.attrib,
+   attribute lighting-color { SVGColor.datatype }?,
+   attribute surfaceScale { Number.datatype }?,
+   attribute diffuseConstant { Number.datatype }?,
+   attribute kernelUnitLength { NumberOptionalNumber.datatype }?
+
+SVG.feDisplacementMap.content = ( animate | set )*
+
+feDisplacementMap = 
+   element feDisplacementMap
+   {
+      attlist.feDisplacementMap,
+      SVG.feDisplacementMap.content
+   }
+
+attlist.feDisplacementMap &= 
+   SVG.Core.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitiveWithIn.attrib,
+   attribute in2 { text },
+   attribute scale { Number.datatype }?,
+   [ a:defaultValue = "A" ]
+   attribute xChannelSelector { "R" | "G" | "B" | "A" }?,
+   [ a:defaultValue = "A" ]
+   attribute yChannelSelector { "R" | "G" | "B" | "A" }?
+
+SVG.feMorphology.content = ( animate | set )*
+
+feMorphology = 
+   element feMorphology { attlist.feMorphology, SVG.feMorphology.content }
+
+attlist.feMorphology &= 
+   SVG.Core.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitiveWithIn.attrib,
+   [ a:defaultValue = "erode" ] attribute operator { "erode" | "dilate" }?,
+   attribute radius { NumberOptionalNumber.datatype }?
+
+SVG.feSpecularLighting.content = 
+   ( feDistantLight | fePointLight | feSpotLight ),
+   ( animate | set | animateColor )*
+
+feSpecularLighting = 
+   element feSpecularLighting
+   {
+      attlist.feSpecularLighting,
+      SVG.feSpecularLighting.content
+   }
+
+attlist.feSpecularLighting &= 
+   SVG.Core.attrib,
+   SVG.Style.attrib,
+   SVG.Color.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitiveWithIn.attrib,
+   attribute lighting-color { SVGColor.datatype }?,
+   attribute surfaceScale { Number.datatype }?,
+   attribute specularConstant { Number.datatype }?,
+   attribute specularExponent { Number.datatype }?,
+   attribute kernelUnitLength { NumberOptionalNumber.datatype }?
+
+SVG.feTurbulence.content = ( animate | set )*
+
+feTurbulence = 
+   element feTurbulence { attlist.feTurbulence, SVG.feTurbulence.content }
+
+attlist.feTurbulence &= 
+   SVG.Core.attrib,
+   SVG.FilterColor.attrib,
+   SVG.FilterPrimitive.attrib,
+   attribute baseFrequency { NumberOptionalNumber.datatype }?,
+   attribute numOctaves { Integer.datatype }?,
+   attribute seed { Number.datatype }?,
+   [ a:defaultValue = "noStitch" ]
+   attribute stitchTiles { "stitch" | "noStitch" }?,
+   [ a:defaultValue = "turbulence" ]
+   attribute type { "fractalNoise" | "turbulence" }?
+
+SVG.feDistantLight.content = ( animate | set )*
+
+feDistantLight = 
+   element feDistantLight
+   {
+      attlist.feDistantLight,
+      SVG.feDistantLight.content
+   }
+
+attlist.feDistantLight &= 
+   SVG.Core.attrib,
+   attribute azimuth { Number.datatype }?,
+   attribute elevation { Number.datatype }?
+
+SVG.fePointLight.content = ( animate | set )*
+
+fePointLight = 
+   element fePointLight { attlist.fePointLight, SVG.fePointLight.content }
+
+attlist.fePointLight &= 
+   SVG.Core.attrib,
+   attribute x { Number.datatype }?,
+   attribute y { Number.datatype }?,
+   attribute z { Number.datatype }?
+
+SVG.feSpotLight.content = ( animate | set )*
+
+feSpotLight = 
+   element feSpotLight { attlist.feSpotLight, SVG.feSpotLight.content }
+
+attlist.feSpotLight &= 
+   SVG.Core.attrib,
+   attribute x { Number.datatype }?,
+   attribute y { Number.datatype }?,
+   attribute z { Number.datatype }?,
+   attribute pointsAtX { Number.datatype }?,
+   attribute pointsAtY { Number.datatype }?,
+   attribute pointsAtZ { Number.datatype }?,
+   attribute specularExponent { Number.datatype }?,
+   attribute limitingConeAngle { Number.datatype }?

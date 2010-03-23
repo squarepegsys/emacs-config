@@ -1,0 +1,35 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
+ClassList.datatype = xsd:NMTOKENS
+
+StyleSheet.datatype = xsd:string
+
+MediaDesc.datatype = xsd:string
+
+SVG.Style.extra.attrib = empty
+
+SVG.Style.attrib &= 
+   attribute style { StyleSheet.datatype }?,
+   attribute class { ClassList.datatype }?,
+   SVG.Style.extra.attrib
+
+SVG.Style.extra.class = notAllowed
+
+SVG.Style.class |= style | SVG.Style.extra.class
+
+SVG.style.content = text
+
+style = element style { attlist.style, SVG.style.content }
+
+attlist.style &= 
+   [ a:defaultValue = "preserve" ] attribute xml:space { "preserve" }?,
+   SVG.id.attrib,
+   SVG.base.attrib,
+   SVG.lang.attrib,
+   SVG.Core.extra.attrib,
+   attribute type { ContentType.datatype },
+   attribute media { MediaDesc.datatype }?,
+   attribute title { Text.datatype }?

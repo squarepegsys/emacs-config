@@ -1,0 +1,182 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+Points.datatype = xsd:string
+
+SVG.Shape.extra.class = notAllowed
+
+SVG.Shape.class |= 
+   path
+ | rect
+ | circle
+ | line
+ | ellipse
+ | polyline
+ | polygon
+ | SVG.Shape.extra.class
+
+SVG.path.content = SVG.Description.class*, SVG.Animation.class*
+
+path = element path { attlist.path, SVG.path.content }
+
+attlist.path &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Marker.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute d { PathData.datatype },
+   attribute pathLength { Number.datatype }?,
+   attribute transform { TransformList.datatype }?
+
+SVG.rect.content = SVG.Description.class*, SVG.Animation.class*
+
+rect = element rect { attlist.rect, SVG.rect.content }
+
+attlist.rect &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute x { Coordinate.datatype }?,
+   attribute y { Coordinate.datatype }?,
+   attribute width { Length.datatype },
+   attribute height { Length.datatype },
+   attribute rx { Length.datatype }?,
+   attribute ry { Length.datatype }?,
+   attribute transform { TransformList.datatype }?
+
+SVG.circle.content = SVG.Description.class*, SVG.Animation.class*
+
+circle = element circle { attlist.circle, SVG.circle.content }
+
+attlist.circle &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute cx { Coordinate.datatype }?,
+   attribute cy { Coordinate.datatype }?,
+   attribute r { Length.datatype },
+   attribute transform { TransformList.datatype }?
+
+SVG.line.content = SVG.Description.class*, SVG.Animation.class*
+
+line = element line { attlist.line, SVG.line.content }
+
+attlist.line &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Marker.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute x1 { Coordinate.datatype }?,
+   attribute y1 { Coordinate.datatype }?,
+   attribute x2 { Coordinate.datatype }?,
+   attribute y2 { Coordinate.datatype }?,
+   attribute transform { TransformList.datatype }?
+
+SVG.ellipse.content = SVG.Description.class*, SVG.Animation.class*
+
+ellipse = element ellipse { attlist.ellipse, SVG.ellipse.content }
+
+attlist.ellipse &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute cx { Coordinate.datatype }?,
+   attribute cy { Coordinate.datatype }?,
+   attribute rx { Length.datatype },
+   attribute ry { Length.datatype },
+   attribute transform { TransformList.datatype }?
+
+SVG.polyline.content = SVG.Description.class*, SVG.Animation.class*
+
+polyline = element polyline { attlist.polyline, SVG.polyline.content }
+
+attlist.polyline &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Marker.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute points { Points.datatype },
+   attribute transform { TransformList.datatype }?
+
+SVG.polygon.content = SVG.Description.class*, SVG.Animation.class*
+
+polygon = element polygon { attlist.polygon, SVG.polygon.content }
+
+attlist.polygon &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Marker.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.GraphicalEvents.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute points { Points.datatype },
+   attribute transform { TransformList.datatype }?

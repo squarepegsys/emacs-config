@@ -1,0 +1,54 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+MaskValue.datatype = xsd:string
+
+SVG.Mask.extra.attrib = empty
+
+SVG.Mask.attrib &= 
+   attribute mask { MaskValue.datatype }?,
+   SVG.Mask.extra.attrib
+
+SVG.Mask.extra.class = notAllowed
+
+SVG.Mask.class |= mask | SVG.Mask.extra.class
+
+SVG.mask.content = 
+   (
+      SVG.Description.class
+    | SVG.Animation.class
+    | SVG.Structure.class
+    | SVG.Conditional.class
+    | SVG.Image.class
+    | SVG.Style.class
+    | SVG.Shape.class
+    | SVG.Text.class
+    | SVG.Marker.class
+    | SVG.Profile.class
+    | SVG.Gradient.class
+    | SVG.Pattern.class
+    | SVG.Clip.class
+    | SVG.Mask.class
+    | SVG.Filter.class
+    | SVG.Cursor.class
+    | SVG.Hyperlink.class
+    | SVG.View.class
+    | SVG.Script.class
+    | SVG.Font.class
+   )*
+
+mask = element mask { attlist.mask, SVG.mask.content }
+
+attlist.mask &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Presentation.attrib,
+   SVG.External.attrib,
+   attribute x { Coordinate.datatype }?,
+   attribute y { Coordinate.datatype }?,
+   attribute width { Length.datatype }?,
+   attribute height { Length.datatype }?,
+   attribute maskUnits { "userSpaceOnUse" | "objectBoundingBox" }?,
+   attribute maskContentUnits { "userSpaceOnUse" | "objectBoundingBox" }?

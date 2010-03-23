@@ -1,0 +1,52 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
+SVG.Pattern.extra.class = notAllowed
+
+SVG.Pattern.class |= pattern | SVG.Pattern.extra.class
+
+SVG.pattern.content = 
+   (
+      SVG.Description.class
+    | SVG.Animation.class
+    | SVG.Structure.class
+    | SVG.Conditional.class
+    | SVG.Image.class
+    | SVG.Style.class
+    | SVG.Shape.class
+    | SVG.Text.class
+    | SVG.Marker.class
+    | SVG.Profile.class
+    | SVG.Gradient.class
+    | SVG.Pattern.class
+    | SVG.Clip.class
+    | SVG.Mask.class
+    | SVG.Filter.class
+    | SVG.Cursor.class
+    | SVG.Hyperlink.class
+    | SVG.View.class
+    | SVG.Script.class
+    | SVG.Font.class
+   )*
+
+pattern = element pattern { attlist.pattern, SVG.pattern.content }
+
+attlist.pattern &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Presentation.attrib,
+   SVG.XLink.attrib,
+   SVG.External.attrib,
+   attribute x { Coordinate.datatype }?,
+   attribute y { Coordinate.datatype }?,
+   attribute width { Length.datatype }?,
+   attribute height { Length.datatype }?,
+   attribute patternUnits { "userSpaceOnUse" | "objectBoundingBox" }?,
+   attribute patternContentUnits { "userSpaceOnUse" | "objectBoundingBox" }?,
+   attribute patternTransform { TransformList.datatype }?,
+   attribute viewBox { ViewBoxSpec.datatype }?,
+   [ a:defaultValue = "xMidYMid meet" ]
+   attribute preserveAspectRatio { PreserveAspectRatioSpec.datatype }?

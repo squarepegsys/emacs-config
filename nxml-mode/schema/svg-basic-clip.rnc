@@ -1,0 +1,41 @@
+default namespace id61777 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+ClipPathValue.datatype = xsd:string
+
+SVG.Clip.extra.attrib = empty
+
+SVG.Clip.attrib &= 
+   attribute clip-path { ClipPathValue.datatype }?,
+   attribute clip-rule { ClipFillRule.datatype }?,
+   SVG.Clip.extra.attrib
+
+SVG.Clip.extra.class = notAllowed
+
+SVG.Clip.class |= clipPath | SVG.Clip.extra.class
+
+SVG.clipPath.class = rect | SVG.Animation.class | SVG.Use.class
+
+SVG.clipPath.content = SVG.Description.class*, SVG.clipPath.class*
+
+clipPath = element clipPath { attlist.clipPath, SVG.clipPath.content }
+
+attlist.clipPath &= 
+   SVG.Core.attrib,
+   SVG.Conditional.attrib,
+   SVG.Style.attrib,
+   SVG.Text.attrib,
+   SVG.TextContent.attrib,
+   SVG.Font.attrib,
+   SVG.Paint.attrib,
+   SVG.Color.attrib,
+   SVG.Opacity.attrib,
+   SVG.Graphics.attrib,
+   SVG.Clip.attrib,
+   SVG.Mask.attrib,
+   SVG.Filter.attrib,
+   SVG.Cursor.attrib,
+   SVG.External.attrib,
+   attribute transform { TransformList.datatype }?,
+   attribute clipPathUnits { "userSpaceOnUse" | "objectBoundingBox" }?

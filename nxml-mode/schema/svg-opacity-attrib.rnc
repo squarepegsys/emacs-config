@@ -1,0 +1,17 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+SVG.opacity.attrib = attribute opacity { OpacityValue.datatype }?
+
+SVG.fill-opacity.attrib = attribute fill-opacity { OpacityValue.datatype }?
+
+SVG.stroke-opacity.attrib = attribute stroke-opacity { OpacityValue.datatype }?
+
+SVG.Opacity.extra.attrib = empty
+
+SVG.Opacity.attrib &= 
+   SVG.opacity.attrib,
+   SVG.fill-opacity.attrib,
+   SVG.stroke-opacity.attrib,
+   SVG.Opacity.extra.attrib

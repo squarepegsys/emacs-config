@@ -1,0 +1,20 @@
+default namespace id2244565 = "http://www.w3.org/2000/svg"
+namespace local = ""
+namespace inh = inherit
+
+SVG.id.attrib = attribute id { xsd:ID }?
+
+SVG.base.attrib = attribute xml:base { URI.datatype }?
+
+SVG.lang.attrib = attribute xml:lang { LanguageCode.datatype }?
+
+SVG.space.attrib = attribute xml:space { "default" | "preserve" }?
+
+SVG.Core.extra.attrib = empty
+
+SVG.Core.attrib = 
+   SVG.id.attrib,
+   SVG.base.attrib,
+   SVG.lang.attrib,
+   SVG.space.attrib,
+   SVG.Core.extra.attrib
