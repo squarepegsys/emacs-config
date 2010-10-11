@@ -4,12 +4,12 @@
 ;; Description: Macros for Icicles
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2009, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2010, Drew Adams, all rights reserved.
 ;; Created: Mon Feb 27 09:24:28 2006
 ;; Version: 22.0
-;; Last-Updated: Thu Sep 17 13:54:41 2009 (-0700)
+;; Last-Updated: Sat Oct  9 14:37:31 2010 (-0700)
 ;;           By: dradams
-;;     Update #: 516
+;;     Update #: 548
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/icicles-mac.el
 ;; Keywords: internal, extensions, help, abbrev, local, minibuffer,
 ;;           keys, apropos, completion, matching, regexp, command
@@ -114,7 +114,7 @@
 ;;; Macros -----------------------------------------------------------
 
 (if (fboundp 'with-selected-window)     ; Emacs 22+
-    (fset 'icicle-with-selected-window (symbol-function 'with-selected-window))
+    (defalias 'icicle-with-selected-window (symbol-function 'with-selected-window))
   (defmacro icicle-with-selected-window (window &rest body)
     "Execute the forms in BODY with WINDOW as the selected window.
 The value returned is the value of the last form in BODY.
@@ -181,17 +181,27 @@ Optional arg DONT-SAVE non-nil means do not call
 MORE-BINDINGS is a list of additional bindings, which are created
 before the others."
   `(,@more-bindings
-    (completion-ignore-case           (or (and (boundp 'read-buffer-completion-ignore-case)
-                                           read-buffer-completion-ignore-case)
-                                       completion-ignore-case))
-    (icicle-must-match-regexp         icicle-buffer-match-regexp)
-    (icicle-must-not-match-regexp     icicle-buffer-no-match-regexp)
-    (icicle-must-pass-predicate       icicle-buffer-predicate)
-    (icicle-require-match-flag        icicle-buffer-require-match-flag)
-    (icicle-extra-candidates          icicle-buffer-extras)
-    (icicle-transform-function        'icicle-remove-dups-if-extras)
-    (icicle-sort-function             (or icicle-buffer-sort icicle-sort-function))
-    (icicle-sort-functions-alist
+    (completion-ignore-case                      (or (and (boundp 'read-buffer-completion-ignore-case)
+                                                      read-buffer-completion-ignore-case)
+                                                  completion-ignore-case))
+    (icicle-show-Completions-initially-flag      (or icicle-show-Completions-initially-flag
+                                                     icicle-buffers-ido-like-flag))
+    (icicle-top-level-when-sole-completion-flag  (or icicle-top-level-when-sole-completion-flag
+                                                     icicle-buffers-ido-like-flag))
+    (icicle-default-value                        (if (and icicle-buffers-ido-like-flag
+                                                          icicle-default-value)
+                                                     icicle-buffers-ido-like-flag
+                                                   icicle-default-value))
+    (icicle-must-match-regexp                    icicle-buffer-match-regexp)
+    (icicle-must-not-match-regexp                icicle-buffer-no-match-regexp)
+    (icicle-must-pass-predicate                  icicle-buffer-predicate)
+    (icicle-require-match-flag                   icicle-buffer-require-match-flag)
+    (icicle-extra-candidates                     icicle-buffer-extras)
+    (icicle-ignore-space-prefix-flag             icicle-buffer-ignore-space-prefix-flag)
+    (icicle-delete-candidate-object              'icicle-kill-a-buffer) ; `S-delete' kills current buf
+    (icicle-transform-function                   'icicle-remove-dups-if-extras)
+    (icicle-sort-comparer                        (or icicle-buffer-sort icicle-sort-comparer))
+    (icicle-sort-orders-alist
      (append (list
               '("by last access")       ; Renamed from "turned OFF'.
               '("*...* last" . icicle-buffer-sort-*...*-last)
@@ -200,13 +210,11 @@ before the others."
               (and (fboundp 'icicle-mode-line-name-less-p)
                '("by mode-line mode name" . icicle-mode-line-name-less-p))
               '("by file/process name" . icicle-buffer-file/process-name-less-p))
-      (delete '("turned OFF") icicle-sort-functions-alist)))
-    (icicle-ignore-space-prefix-flag  icicle-buffer-ignore-space-prefix-flag)
+      (delete '("turned OFF") icicle-sort-orders-alist)))
     (icicle-candidate-alt-action-fn
      (or icicle-candidate-alt-action-fn (icicle-alt-act-fn-for-type "buffer")))
     (icicle-all-candidates-list-alt-action-fn
      (or icicle-all-candidates-list-alt-action-fn (icicle-alt-act-fn-for-type "buffer")))
-    (icicle-delete-candidate-object   'icicle-kill-a-buffer) ; `S-delete' kills current buffer.
     (bufflist
      (if current-prefix-arg
          (if (wholenump (prefix-numeric-value current-prefix-arg))
@@ -219,24 +227,32 @@ before the others."
 MORE-BINDINGS is a list of additional bindings, which are created
 before the others."
   `(,@more-bindings
-    (completion-ignore-case           (or (and (boundp 'read-file-name-completion-ignore-case)
-                                           read-file-name-completion-ignore-case)
-                                       completion-ignore-case))
-    (icicle-must-match-regexp         icicle-file-match-regexp)
-    (icicle-must-not-match-regexp     icicle-file-no-match-regexp)
-    (icicle-must-pass-predicate       icicle-file-predicate)
-    (icicle-require-match-flag        icicle-file-require-match-flag)
-    (icicle-extra-candidates          icicle-file-extras)
-    (icicle-transform-function        'icicle-remove-dups-if-extras)
-    (icicle-sort-function             (or icicle-file-sort icicle-sort-function))
-    (icicle-ignore-space-prefix-flag  icicle-buffer-ignore-space-prefix-flag)
+    (completion-ignore-case
+     (or (and (boundp 'read-file-name-completion-ignore-case) read-file-name-completion-ignore-case)
+      completion-ignore-case))
+    (icicle-show-Completions-initially-flag      (or icicle-show-Completions-initially-flag
+                                                  icicle-files-ido-like-flag))
+    (icicle-top-level-when-sole-completion-flag  (or icicle-top-level-when-sole-completion-flag
+                                                  icicle-files-ido-like-flag))
+    (icicle-default-value                        (if (and icicle-files-ido-like-flag
+                                                          icicle-default-value)
+                                                     icicle-files-ido-like-flag
+                                                   ;;  Get default via `M-n', but do not insert it.
+                                                   (and (memq icicle-default-value '(t nil))
+                                                        icicle-default-value)))
+    (icicle-must-match-regexp                    icicle-file-match-regexp)
+    (icicle-must-not-match-regexp                icicle-file-no-match-regexp)
+    (icicle-must-pass-predicate                  icicle-file-predicate)
+    (icicle-require-match-flag                   icicle-file-require-match-flag)
+    (icicle-extra-candidates                     icicle-file-extras)
+    (icicle-transform-function                   'icicle-remove-dups-if-extras)
+    (icicle-sort-comparer                        (or icicle-file-sort icicle-sort-comparer))
+    (icicle-ignore-space-prefix-flag             icicle-buffer-ignore-space-prefix-flag)
     (icicle-candidate-alt-action-fn
      (or icicle-candidate-alt-action-fn (icicle-alt-act-fn-for-type "file")))
     (icicle-all-candidates-list-alt-action-fn
      (or icicle-all-candidates-list-alt-action-fn (icicle-alt-act-fn-for-type "file")))
-    (icicle-delete-candidate-object   'icicle-delete-file-or-directory) ; `S-delete' deletes file.
-    (icicle-default-value               ; Let user get default via `M-n', but don't insert it.
-     (and (memq icicle-default-value '(t nil)) icicle-default-value))))
+    (icicle-delete-candidate-object              'icicle-delete-file-or-directory)))
 
 (defmacro icicle-define-command
     (command doc-string function prompt collection &optional
@@ -244,10 +260,12 @@ before the others."
      bindings first-sexp undo-sexp last-sexp not-interactive-p)
   ;; Hard-code these in doc string, because \\[...] prefers ASCII
   ;; `C-RET'   instead of `\\[icicle-candidate-action]'
-  ;; `C-down'  instead of `\\[icicle-next-prefix-candidate-action]'
-  ;; `C-up'    instead of `\\[icicle-previous-prefix-candidate-action]'
+  ;; `C-down'  instead of `\\[icicle-next-candidate-per-mode-action]'
+  ;; `C-up', `C-wheel-up' instead of `\\[icicle-previous-candidate-per-mode-action]'
   ;; `C-next'  instead of `\\[icicle-next-apropos-candidate-action]'
   ;; `C-prior' instead of `\\[icicle-previous-apropos-candidate-action]'
+  ;; `C-end'   instead of `\\[icicle-next-prefix-candidate-action]'
+  ;; `C-home'  instead of `\\[icicle-previous-prefix-candidate-action]'
   "Define COMMAND with DOC-STRING based on FUNCTION.
 COMMAND is a symbol.  DOC-STRING is a string.
 FUNCTION is a function that takes one argument, read as input.
@@ -301,10 +319,12 @@ these keys with prefix `C-' are active:
 
 \\<minibuffer-local-completion-map>\
 `C-mouse-2', `C-RET' - Act on current completion candidate only
-`C-down'  - Move to next prefix-completion candidate and act
-`C-up'    - Move to previous prefix-completion candidate and act
+`C-down', `C-wheel-down' - Move to next completion candidate and act
+`C-up', `C-wheel-up' - Move to previous completion candidate and act
 `C-next'  - Move to next apropos-completion candidate and act
 `C-prior' - Move to previous apropos-completion candidate and act
+`C-end'   - Move to next prefix-completion candidate and act
+`C-home'  - Move to previous prefix-completion candidate and act
 `\\[icicle-all-candidates-action]'     - Act on *all* candidates, successively (careful!)
 
 When candidate action and cycling are combined (e.g. `C-next'), user
@@ -381,10 +401,12 @@ This is an Icicles command - see command `icicle-mode'.")
      bindings first-sexp undo-sexp last-sexp not-interactive-p)
   ;; Hard-code these in doc string, because \\[...] prefers ASCII
   ;; `C-RET'   instead of `\\[icicle-candidate-action]'
-  ;; `C-down'  instead of `\\[icicle-next-prefix-candidate-action]'
-  ;; `C-up'    instead of `\\[icicle-previous-prefix-candidate-action]'
+  ;; `C-down'  instead of `\\[icicle-next-candidate-per-mode-action]'
+  ;; `C-up', `C-wheel-up' instead of `\\[icicle-previous-candidate-per-mode-action]'
   ;; `C-next'  instead of `\\[icicle-next-apropos-candidate-action]'
   ;; `C-prior' instead of `\\[icicle-previous-apropos-candidate-action]'
+  ;; `C-end'   instead of `\\[icicle-next-prefix-candidate-action]'
+  ;; `C-home'  instead of `\\[icicle-previous-prefix-candidate-action]'
   "Define COMMAND with DOC-STRING based on FUNCTION.
 COMMAND is a symbol.  DOC-STRING is a string.
 FUNCTION is a function that takes one file-name or directory-name
@@ -437,10 +459,12 @@ these keys with prefix `C-' are active:
 
 \\<minibuffer-local-completion-map>\
 `C-mouse-2', `C-RET' - Act on current completion candidate only
-`C-down'  - Move to next prefix-completion candidate and act
-`C-up'    - Move to previous prefix-completion candidate and act
+`C-down', `C-wheel-down' - Move to next completion candidate and act
+`C-up', `C-wheel-up' - Move to previous completion candidate and act
 `C-next'  - Move to next apropos-completion candidate and act
 `C-prior' - Move to previous apropos-completion candidate and act
+`C-end'   - Move to next prefix-completion candidate and act
+`C-home'  - Move to previous prefix-completion candidate and act
 `\\[icicle-all-candidates-action]'     - Act on *all* candidates, successively (careful!)
 
 When candidate action and cycling are combined (e.g. `C-next'), user
@@ -477,8 +501,8 @@ This is an Icicles command - see command `icicle-mode'.")
                                                            minibuffer-prompt-properties))
                     (minibuffer-setup-hook            minibuffer-setup-hook)
                     (minibuffer-text-before-history   minibuffer-text-before-history))
-                (setq candidate  (expand-file-name candidate
-                                                   (file-name-directory icicle-last-input)))
+                (setq candidate  (expand-file-name
+                                  candidate (icicle-file-name-directory icicle-last-input)))
                 (condition-case in-action-fn
                     ;; Treat 3 cases, because previous use of `icicle-candidate-action-fn'
                     ;; might have deleted the file or the window.
@@ -533,14 +557,15 @@ DOC-STRING is the doc string of the new command."
   (let ((command  (intern (concat "icicle-sort-"
                                   (replace-regexp-in-string "\\s-+" "-" sort-order)))))
     `(progn
-      (setq icicle-sort-functions-alist  (icicle-assoc-delete-all
-                                          ,sort-order icicle-sort-functions-alist))
-      (push (cons ,sort-order ',comparison-fn) icicle-sort-functions-alist)
+      (setq icicle-sort-orders-alist  (icicle-assoc-delete-all
+                                       ,sort-order
+                                       icicle-sort-orders-alist))
+      (push (cons ,sort-order ',comparison-fn) icicle-sort-orders-alist)
       (defun ,command ()
         ,doc-string
         (interactive)
-        (setq icicle-sort-function  #',comparison-fn)
-        (message "Sorting is now %s" ,sort-order)
+        (setq icicle-sort-comparer  #',comparison-fn)
+        (message "Sorting is now %s%s" ,sort-order (if icicle-reverse-sort-p ", REVERSED" ""))
         (icicle-complete-again-update)))))
  
 ;;(@* "Functions")
