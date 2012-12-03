@@ -1,4 +1,0 @@
-# name: direction
-# key: dir
-# --
-direction: ${1:$$(yas/choose-value '("rtl" "ltr"))};

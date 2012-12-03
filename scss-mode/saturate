@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: saturate
-# key: saturate
-# --
-saturate(${1:#009}, ${2:30}%);

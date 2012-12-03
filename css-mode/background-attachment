@@ -1,4 +1,0 @@
-# name: background-attachment
-# key: bga
-# --
-background-attachment: ${1:$$(yas/choose-value '("fixed" "scroll"))};

@@ -1,4 +1,0 @@
-# name: blue
-# key: blue
-# --
-blue(${1:#000099});

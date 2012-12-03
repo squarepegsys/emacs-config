@@ -1,4 +1,0 @@
-# name: comparable
-# key: comparable
-# --
-comparable($1, $2);

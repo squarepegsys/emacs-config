@@ -1,6 +1,0 @@
-# name: min-width ie6
-# key: mwie6
-# --
-min-width: $1px;
-width: auto !important;
-width: $1px;

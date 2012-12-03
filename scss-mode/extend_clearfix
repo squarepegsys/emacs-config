@@ -1,4 +1,0 @@
-# name: extend_clearfix
-# key: extend_clearfix
-# --
-@extend .clearfix;

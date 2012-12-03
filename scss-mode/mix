@@ -1,4 +1,0 @@
-# name: mix
-# key: mix
-# --
-mix(${1:red}, ${2:blue}, ${3:50}%);

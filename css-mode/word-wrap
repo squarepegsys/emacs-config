@@ -1,4 +1,0 @@
-# name: word-wrap
-# key: ww
-# --
-word-wrap: ${1:$$(yas/choose-value '("break-word" "normal"))};

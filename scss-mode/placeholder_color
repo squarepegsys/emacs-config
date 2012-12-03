@@ -1,4 +1,0 @@
-# name: placeholder-color
-# key: placeholder-color
-# --
-@include placeholder-color($1);
