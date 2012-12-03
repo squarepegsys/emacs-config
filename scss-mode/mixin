@@ -1,0 +1,6 @@
+# name: mixin
+# key: mixin
+# --
+@mixin ${1:name}${2:(${3:arg})}{
+  $0
+}

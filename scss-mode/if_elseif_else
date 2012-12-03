@@ -1,0 +1,11 @@
+# name: if_elseif_else
+# key: if_elseif_else
+# --
+// operator == != < > <= >= and not or
+@if $1 {
+  $3
+} @else if $2 {
+  $4
+} @else {
+  $5
+}
