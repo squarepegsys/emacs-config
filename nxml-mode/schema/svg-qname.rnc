@@ -1,7 +1,0 @@
-default namespace id2245606 = "http://www.w3.org/2000/svg"
-namespace local = ""
-namespace inh = inherit
-
-XLINK.xmlns.attrib = empty
-
-SVG.xmlns.attrib = empty, XLINK.xmlns.attrib

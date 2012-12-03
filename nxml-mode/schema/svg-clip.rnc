@@ -1,7 +1,0 @@
-default namespace id2244565 = "http://www.w3.org/2000/svg"
-namespace local = ""
-namespace inh = inherit
-
-include "svg-basic-clip.rnc"
-
-SVG.clipPath.class |= SVG.Shape.class | SVG.Text.class
