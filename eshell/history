@@ -1,0 +1,7 @@
+source ../bin/activate_this.py
+cd ..
+l
+cd bin/
+source activate
+which python
+exit
