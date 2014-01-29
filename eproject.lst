@@ -1,0 +1,15 @@
+;; -*- mode: Lisp; -*-
+
+(setq prj-version nil)
+
+(setq prj-list
+      '(("eproject" "/Users/mhostetler/.emacs.d/emacs-for-python/extensions/eproject")))
+
+(setq prj-last-open nil)
+
+(setq prj-frame-pos
+      '((top . 34)
+	(left . 0)
+	(width . 155)
+	(height . 38)))
+
